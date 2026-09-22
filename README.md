@@ -102,22 +102,27 @@ export const options = {
 ```
 THRESHOLDS
   checks
-  ✓ 'rate>0.90' rate=97.94%
+    ✓ 'rate>0.90' rate=98.28%
 
-  http_req_duration{name:cart}
-  ✓ 'p(95)<200' p(95)=2.51ms
+    http_req_duration{name:cart}
+    ✓ 'p(95)<200' p(95)=2.67ms
+    ✓ 'p(99)<400' p(99)=25.58ms
 
-  http_req_duration{name:report}
-  ✓ 'p(95)<450' p(95)=388.05ms
+    http_req_duration{name:report}
+    ✓ 'p(95)<450' p(95)=392.5ms
 
-  http_req_failed{name:pay}
-  ✓ 'rate<0.08' rate=6.15%
+    http_req_failed{name:pay}
+    ✓ 'rate<0.08' rate=5.14%
 ```
 
 **Бүх 4 threshold PASS.** Ажиглалт:
-- `/cart/add` бодит p95 (2.51мс) нь threshold-оос (200мс) хамаагүй бага — localhost орчинд сервер маш хурдан хариулдаг тул энэ threshold сул margin-тэй.
-- `/pay` error rate (6.15%) нь серверт кодоор суулгасан ~5% алдаатай нийцэж, 8% threshold-той сайн зохицож байна.
-- `/report` бодит p95 (388.05мс) нь 450мс threshold-той ойрхон, сайн уялдаатай — учир нь энэ тоог сервер кодны бодит хязгаараас (200-400мс) гаргаж авсан.
+
+* `/cart/add` бодит p95 = 2.67мс, p99 = 25.58мс байна. Аль аль нь threshold болох p95 < 200мс, p99 < 400мс-ээс хамаагүй бага байгаа тул localhost орчинд серверийн хариу маш хурдан байгааг харуулж байна.
+
+* `/pay` error rate **5.14%** нь серверт кодоор суулгасан ~5% алдаатай нийцэж, 8% threshold-той сайн зохицож байна.
+
+* `/report` бодит p95 **392.5мс** нь 450мс threshold-той ойрхон, сайн уялдаатай — учир нь энэ тоог сервер кодны бодит хязгаараас (200–400мс) гаргаж авсан.
+
 
 ---
 
